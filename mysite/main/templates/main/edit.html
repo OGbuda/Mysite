@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+
+{% block content %}
+    <h1>Добавтье свое видео</h1>
+    <form method="post", enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.name }}<br>
+        {{ form.description }}<br>
+        <button type="submit" class="btn btn-success">Редактировать видео </button>
+    </form>
+{% endblock %}

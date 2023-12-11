@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="main-posts">
+      <div class="row">
+        <div class="col-md-6 col-sm-6">
+          <h2>{{ video.name }}</h2>
+          <p>{{ video.description }}</p>
+      </div>
+        <div class="col-md-12 col-sm-12">
+          <video
+              id="my-video"
+              class="video-js"
+              controls
+              preload="auto"
+              width="900"
+              height="500"
+              data-setup="{}"
+          >
+            <source src="{% url 'stream' video.id %}" type="video/mp4"/>
+            <source src="{% url 'stream' video.id %}" type="video/webm"/>
+          </video>
+        </div>
+    </div>
+  </div>
+{% endblock %}

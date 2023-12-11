@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>Все доступные видео на нашем сайте специально для вас</h1>
+    {% for video in play %}
+        <div class="alert alert-warning mt-2">
+            <h3>
+                {{ video.name }}
+            </h3>
+            <div>
+                <a href="{% url 'player' video.id %}">{{ video.description|slice:":100"|default:'' }}{% if video.description|length > 100 %}...{% endif %}</a>
+             {% if request.user.is_superuser or video.author == request.user %}
+                            {% if request.user.is_authenticated %}
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-outline-secondary" href="{% url 'delete' video.id %}">Удалить</a>
+                                <a class="btn btn-sm btn-outline-secondary" href="{% url 'edit' video.id %}">Редактировать</a>
+                            </div>
+                            {% endif %}
+            {% endif %}
+            </div>
+        </div>
+
+    {% endfor %}
+{% endblock %}
